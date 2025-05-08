@@ -28,7 +28,7 @@ public class PessoaService {
         return toResponse(pessoaSalva);
     }
 
-    public PessoaResponseDto buscarPorCdDocPessoa(UUID cdDocPessoa) {
+    public PessoaResponseDto buscarPorCdDocPessoa(String cdDocPessoa) {
         PessoaModel pessoaModel = pessoaRepository.buscarPorCdDocPessoa(cdDocPessoa).orElseThrow(() -> new IllegalArgumentException("Pessoa não encontrada"));
         return toResponse(pessoaModel);
     }
@@ -37,7 +37,7 @@ public class PessoaService {
         return pessoaRepository.listarTodasPessoas().stream().map(this::toResponse).collect(Collectors.toList());
     }
 
-    public void removerPessoa(UUID cdDocPessoa) {
+    public void removerPessoa(String cdDocPessoa) {
         pessoaRepository.removerPessoa(cdDocPessoa);
     }
 

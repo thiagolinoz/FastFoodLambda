@@ -27,7 +27,7 @@ public class PessoaController {
     }
 
     @GetMapping("/v1/pessoa/{cdDocPessoa}")
-    public ResponseEntity<PessoaResponseDto> buscarPorCdDocPessoa(@PathVariable UUID cdDocPessoa) {
+    public ResponseEntity<PessoaResponseDto> buscarPorCdDocPessoa(@PathVariable String cdDocPessoa) {
         PessoaResponseDto pessoaResponseDto = pessoaService.buscarPorCdDocPessoa(cdDocPessoa);
         return ResponseEntity.ok(pessoaResponseDto);
     }

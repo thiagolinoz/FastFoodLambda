@@ -9,7 +9,7 @@ import java.util.UUID;
 public interface PessoaRepositoryPort {
 
     PessoaModel cadastrarPessoa(PessoaModel pessoaModel);
-    Optional<PessoaModel> buscarPorCdDocPessoa(UUID cdDocPessoa);
+    Optional<PessoaModel> buscarPorCdDocPessoa(String cdDocPessoa);
     List<PessoaModel> listarTodasPessoas();
-    void removerPessoa(UUID cdDocPessoa);
+    void removerPessoa(String cdDocPessoa);
 }

@@ -5,6 +5,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication(scanBasePackages = {
         "br.com.fiap.postechfastfood",
+        "br.com.fiap.postechfastfood.infrastructure.web.api",
+        "br.com.fiap.postechfastfood.infrastructure.persistence.jpa"
 
 })
 public class PostechFastfoodApplication {

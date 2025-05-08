@@ -24,12 +24,13 @@ public class PessoaRepository implements PessoaRepositoryPort {
     @Transactional
     public PessoaModel cadastrarPessoa(PessoaModel pessoaModel) {
         PessoaEntity pessoaEntity = PessoaMapper.toEntity(pessoaModel);
-        em.persist(pessoaEntity);
+//        em.persist(pessoaEntity); // Deve ser utilizado quando a informação da chave primária não for enviada. Caso contrário, utilize o em.merge()
+        em.merge(pessoaEntity);
         return PessoaMapper.toModel(pessoaEntity);
     }
 
     @Override
-    public Optional<PessoaModel> buscarPorCdDocPessoa(UUID cdDocPessoa) {
+    public Optional<PessoaModel> buscarPorCdDocPessoa(String cdDocPessoa) {
         PessoaEntity pessoaEntity = em.find(PessoaEntity.class, cdDocPessoa);
         return Optional.ofNullable(pessoaEntity).map(PessoaMapper::toModel);
     }
@@ -43,7 +44,7 @@ public class PessoaRepository implements PessoaRepositoryPort {
 
     @Override
     @Transactional
-    public void removerPessoa(UUID cdDocPessoa) {
+    public void removerPessoa(String cdDocPessoa) {
         em.remove(em.getReference(PessoaEntity.class, cdDocPessoa));
     }
 }

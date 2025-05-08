@@ -16,7 +16,6 @@ import lombok.Setter;
 public class PessoaEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "cd_doc_pessoa", nullable = false, unique = true)
     private String cdDocPessoa;
     @Column(name = "nm_pessoa", nullable = false)
