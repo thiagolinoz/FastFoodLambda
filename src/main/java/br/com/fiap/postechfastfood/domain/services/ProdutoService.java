@@ -13,7 +13,7 @@ import java.util.Optional;
 public class ProdutoService implements ProdutoServicePort {
 
     private final ProdutoRepositoryPort produtoRepository;
-    public ProdutoService(ProdutoRepositoryPort produtoRepository){this.produtoRepository = produtoRepository}
+    public ProdutoService(ProdutoRepositoryPort produtoRepository){this.produtoRepository = produtoRepository;}
 
     @Override
     public ProdutoResponseDto cadastrar(ProdutoRequestDto produto) {
