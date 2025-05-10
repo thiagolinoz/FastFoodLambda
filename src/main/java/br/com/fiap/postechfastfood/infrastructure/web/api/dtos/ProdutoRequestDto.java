@@ -5,13 +5,13 @@ import br.com.fiap.postechfastfood.domain.enums.TipoCategoriaProdutoEnum;
 import br.com.fiap.postechfastfood.domain.models.ProdutoModel;
 
 
-public record ProdutoRequestDto(String cdProduto,
+public record ProdutoRequestDto(//String cdProduto,
                                 String nmProduto,
                                 String dsDescricao,
                                 double vlPreco,
                                 TipoCategoriaProdutoEnum tpCategoria) {
     public ProdutoRequestDto(ProdutoModel model){
-       this(model.getCdProduto(), model.getNmProduto(), model.getDsDescricao(), model.getVlPreco(), model.getTpCategoria());
+       this(/*model.getCdProduto(),*/ model.getNmProduto(), model.getDsDescricao(), model.getVlPreco(), model.getTpCategoria());
     }
 }
 

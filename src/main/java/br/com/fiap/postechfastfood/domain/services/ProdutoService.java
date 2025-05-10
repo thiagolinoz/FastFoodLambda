@@ -1,14 +1,17 @@
 package br.com.fiap.postechfastfood.domain.services;
 
 import br.com.fiap.postechfastfood.domain.enums.TipoCategoriaProdutoEnum;
+import br.com.fiap.postechfastfood.domain.models.PessoaModel;
 import br.com.fiap.postechfastfood.domain.models.ProdutoModel;
 import br.com.fiap.postechfastfood.domain.ports.in.ProdutoServicePort;
 import br.com.fiap.postechfastfood.domain.ports.out.ProdutoRepositoryPort;
+import br.com.fiap.postechfastfood.infrastructure.web.api.dtos.PessoaResponseDto;
 import br.com.fiap.postechfastfood.infrastructure.web.api.dtos.ProdutoRequestDto;
 import br.com.fiap.postechfastfood.infrastructure.web.api.dtos.ProdutoResponseDto;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 public class ProdutoService implements ProdutoServicePort {
 
@@ -17,17 +20,31 @@ public class ProdutoService implements ProdutoServicePort {
 
     @Override
     public ProdutoResponseDto cadastrar(ProdutoRequestDto produto) {
-        return null;
+        ProdutoModel model = new ProdutoModel.Builder()
+                .setCdProduto(UUID.randomUUID().toString())
+                .setNmProduto(produto.nmProduto())
+                .setDsDescricao(produto.dsDescricao())
+                .setVlPreco(produto.vlPreco())
+                .setTpCategoria(produto.tpCategoria()).build();
+        ProdutoResponseDto response = toResponse(produtoRepository.cadastrar(model));
+        return response;
     }
 
     @Override
     public ProdutoResponseDto atualizar(String cdProduto, ProdutoRequestDto produto) {
-        return null;
+        ProdutoModel model = new ProdutoModel.Builder()
+                .setCdProduto(cdProduto)
+                .setNmProduto(produto.nmProduto())
+                .setDsDescricao(produto.dsDescricao())
+                .setVlPreco(produto.vlPreco())
+                .setTpCategoria(produto.tpCategoria()).build();
+        ProdutoResponseDto response = toResponse(produtoRepository.atualizar(cdProduto, model));
+        return response;
     }
 
     @Override
     public void deletar(String cdProduto) {
-
+        produtoRepository.deletar(cdProduto);
     }
 
     @Override
@@ -38,5 +55,9 @@ public class ProdutoService implements ProdutoServicePort {
     @Override
     public Optional<List<ProdutoResponseDto>> buscar(TipoCategoriaProdutoEnum tpCategoria) {
         return Optional.empty();
+    }
+
+    private ProdutoResponseDto toResponse(ProdutoModel produtoModel) {
+        return new ProdutoResponseDto(produtoModel);
     }
 }

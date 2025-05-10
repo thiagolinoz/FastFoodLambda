@@ -1,5 +1,6 @@
 package br.com.fiap.postechfastfood.infrastructure.web.api.configs;
 
+import br.com.fiap.postechfastfood.domain.ports.in.ProdutoServicePort;
 import br.com.fiap.postechfastfood.domain.ports.out.PessoaRepositoryPort;
 import br.com.fiap.postechfastfood.domain.ports.out.ProdutoRepositoryPort;
 import br.com.fiap.postechfastfood.domain.services.PessoaService;

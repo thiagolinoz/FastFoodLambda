@@ -4,7 +4,7 @@ import br.com.fiap.postechfastfood.domain.enums.TipoCategoriaProdutoEnum;
 
 public class ProdutoModel {
 
-    private String cdProduto;
+    private String cdProduto = "";
     private String nmProduto;
     private String dsDescricao;
     private double vlPreco;
