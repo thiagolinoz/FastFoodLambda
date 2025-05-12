@@ -2,8 +2,8 @@ package br.com.fiap.postechfastfood.domain.services;
 
 import br.com.fiap.postechfastfood.domain.models.PessoaModel;
 import br.com.fiap.postechfastfood.domain.ports.out.PessoaRepositoryPort;
-import br.com.fiap.postechfastfood.infrastructure.web.api.dtos.PessoaRequestDto;
-import br.com.fiap.postechfastfood.infrastructure.web.api.dtos.PessoaResponseDto;
+import br.com.fiap.postechfastfood.dtos.PessoaRequestDto;
+import br.com.fiap.postechfastfood.dtos.PessoaResponseDto;
 
 import java.util.List;
 import java.util.stream.Collectors;

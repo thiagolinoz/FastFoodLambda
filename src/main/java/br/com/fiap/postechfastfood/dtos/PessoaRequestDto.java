@@ -1,4 +1,4 @@
-package br.com.fiap.postechfastfood.infrastructure.web.api.dtos;
+package br.com.fiap.postechfastfood.dtos;
 
 import br.com.fiap.postechfastfood.domain.enums.TipoPessoaEnum;
 import br.com.fiap.postechfastfood.domain.models.PessoaModel;
