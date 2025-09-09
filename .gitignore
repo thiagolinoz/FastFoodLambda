@@ -31,3 +31,6 @@ build/
 .vscode/
 
 ./mariadb
+
+### Terraform ###
+infra/.terraform/
