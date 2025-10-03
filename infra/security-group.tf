@@ -2,7 +2,7 @@ resource "aws_security_group" "aurora_sg" {
   name        = "aurora-sg"
   description = "SG para Aurora"
   vpc_id      = aws_vpc.fiap_fastfood_vpc.id
-  tags = var.tags
+  tags        = var.tags
 
   ingress {
     from_port   = 3306
