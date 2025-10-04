@@ -115,6 +115,17 @@ resource "aws_lambda_function" "CreateAuthChallenge" {
 
   source_code_hash = data.archive_file.CreateAuthChallenge.output_base64sha256
 }
+resource "aws_lambda_function" "authorizer" {
+  filename      = data.archive_file.authorizer.output_path
+  function_name = "${var.project_name}-authorizer-function"
+  role          = var.role_lab # deve ser ARN de role válida
+  handler       = "index.lambda_handler"
+  runtime       = "python3.9"
+  timeout       = 30
+  tags          = var.tags
+
+  source_code_hash = data.archive_file.authorizer.output_base64sha256
+}
 resource "aws_lambda_permission" "allow_cognito_define" {
   statement_id  = "AllowExecutionFromCognitoDefine"
   action        = "lambda:InvokeFunction"
@@ -137,6 +148,30 @@ resource "aws_lambda_permission" "allow_cognito_verify" {
   function_name = aws_lambda_function.VerifyAuthChallengeResponse.function_name
   principal     = "cognito-idp.amazonaws.com"
   source_arn    = aws_cognito_user_pool.main.arn
+}
+
+# resource "aws_lambda_permission" "apigw_invoke" {
+#   statement_id  = "AllowAPIGatewayInvoke"
+#   action        = "lambda:InvokeFunction"
+#   function_name = aws_lambda_function.authorizer.function_name
+#   principal     = "apigateway.amazonaws.com"
+#   source_arn    = "${aws_api_gateway_rest_api.rest_api_pessoa.execution_arn}/authorizers/${aws_api_gateway_authorizer.lambda_authorizer.id}"
+# }
+resource "aws_lambda_permission" "apigw_invoke" {
+  statement_id  = "AllowAPIGatewayInvoke"
+  action        = "lambda:InvokeFunction"
+  function_name = aws_lambda_function.authorizer.function_name
+  principal     = "apigateway.amazonaws.com"
+  # Permissão ampla para o API Gateway invocar o authorizer
+  source_arn    = "${aws_api_gateway_rest_api.rest_api_pessoa.execution_arn}/*"
+}
+# Permissão para API Gateway invocar o Lambda Authorizer
+resource "aws_lambda_permission" "apigw_invoke_authorizer" {
+  statement_id  = "AllowAPIGatewayInvokeAuthorizer"
+  action        = "lambda:InvokeFunction"
+  function_name = aws_lambda_function.authorizer.function_name
+  principal     = "apigateway.amazonaws.com"
+  source_arn    = "${aws_api_gateway_rest_api.rest_api_pessoa.execution_arn}/*/*"
 }
 ########################################
 # Log Group CloudWatch (opcional)
