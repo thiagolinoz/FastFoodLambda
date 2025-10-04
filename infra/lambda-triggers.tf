@@ -9,7 +9,7 @@ def lambda_handler(event, context):
     event['response']['challengeName'] = None
     event['response']['issueTokens'] = True
     event['response']['failAuthentication'] = False
-  return event
+    return event
 EOF
     filename = "index.py"
   }
