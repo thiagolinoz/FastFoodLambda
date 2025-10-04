@@ -163,7 +163,7 @@ resource "aws_lambda_permission" "apigw_invoke" {
   function_name = aws_lambda_function.authorizer.function_name
   principal     = "apigateway.amazonaws.com"
   # Permissão ampla para o API Gateway invocar o authorizer
-  source_arn    = "${aws_api_gateway_rest_api.rest_api_pessoa.execution_arn}/*/*"
+  source_arn    = "${aws_api_gateway_rest_api.rest_api_fastfood.execution_arn}/*/*"
 }
 # Permissão para API Gateway invocar o Lambda Authorizer
 resource "aws_lambda_permission" "apigw_invoke_authorizer" {
@@ -171,7 +171,7 @@ resource "aws_lambda_permission" "apigw_invoke_authorizer" {
   action        = "lambda:InvokeFunction"
   function_name = aws_lambda_function.authorizer.function_name
   principal     = "apigateway.amazonaws.com"
-  source_arn    = "${aws_api_gateway_rest_api.rest_api_pessoa.execution_arn}/*/*"
+  source_arn    = "${aws_api_gateway_rest_api.rest_api_fastfood.execution_arn}/*/*"
 }
 ########################################
 # Log Group CloudWatch (opcional)
