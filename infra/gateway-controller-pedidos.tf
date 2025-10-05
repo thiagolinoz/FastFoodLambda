@@ -124,7 +124,7 @@ resource "aws_api_gateway_integration" "patch_pedidos_status_integration" {
 ######################################
 resource "aws_api_gateway_resource" "pedidos_pagamento" {
   rest_api_id = aws_api_gateway_rest_api.rest_api_fastfood.id
-  parent_id   = aws_api_gateway_resource.pedidos_cdPedido.id
+  parent_id   = aws_api_gateway_resource.pedidos.id
   path_part   = "pagamento"
 }
 
