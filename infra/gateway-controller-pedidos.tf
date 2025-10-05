@@ -122,41 +122,47 @@ resource "aws_api_gateway_integration" "patch_pedidos_status_integration" {
 ######################################
 # GET /api/v1/pedidos/{cdPedido}/pagamento/status
 ######################################
-resource "aws_api_gateway_resource" "pedidos_pagamento" {
+resource "aws_api_gateway_resource" "pedidos_nrPedido" {
   rest_api_id = aws_api_gateway_rest_api.rest_api_fastfood.id
   parent_id   = aws_api_gateway_resource.pedidos.id
+  path_part   = "{nrPedido}"
+}
+
+resource "aws_api_gateway_resource" "pedidos_nrPedido_pagamento" {
+  rest_api_id = aws_api_gateway_rest_api.rest_api_fastfood.id
+  parent_id   = aws_api_gateway_resource.pedidos_nrPedido.id
   path_part   = "pagamento"
 }
 
-resource "aws_api_gateway_resource" "pedidos_pagamento_status" {
+resource "aws_api_gateway_resource" "pedidos_nrPedido_pagamento_status" {
   rest_api_id = aws_api_gateway_rest_api.rest_api_fastfood.id
-  parent_id   = aws_api_gateway_resource.pedidos_pagamento.id
+  parent_id   = aws_api_gateway_resource.pedidos_nrPedido_pagamento.id
   path_part   = "status"
 }
 
-resource "aws_api_gateway_method" "pedidos_pagamento_status_get" {
+resource "aws_api_gateway_method" "pedidos_nrPedido_pagamento_status_get" {
   rest_api_id   = aws_api_gateway_rest_api.rest_api_fastfood.id
-  resource_id   = aws_api_gateway_resource.pedidos_pagamento_status.id
+  resource_id   = aws_api_gateway_resource.pedidos_nrPedido_pagamento_status.id
   http_method   = "GET"
   authorization = "CUSTOM"
   authorizer_id = aws_api_gateway_authorizer.lambda_authorizer.id
 
   request_parameters = {
     "method.request.header.Authorization" = true
-    "method.request.path.cdPedido"        = true
+    "method.request.path.nrPedido"        = true
   }
 }
 
-resource "aws_api_gateway_integration" "pedidos_pagamento_status_integration" {
+resource "aws_api_gateway_integration" "pedidos_nrPedido_pagamento_status_integration" {
   rest_api_id             = aws_api_gateway_rest_api.rest_api_fastfood.id
-  resource_id             = aws_api_gateway_resource.pedidos_pagamento_status.id
-  http_method             = aws_api_gateway_method.pedidos_pagamento_status_get.http_method
+  resource_id             = aws_api_gateway_resource.pedidos_nrPedido_pagamento_status.id
+  http_method             = aws_api_gateway_method.pedidos_nrPedido_pagamento_status_get.http_method
   integration_http_method = "GET"
   type                    = "HTTP_PROXY"
-  uri                     = "${var.host_elb}/api/v1/pedidos/{cdPedido}/pagamento/status"
+  uri                     = "${var.host_elb}/api/v1/pedidos/{nrPedido}/pagamento/status"
 
   request_parameters = {
     "integration.request.header.Authorization" = "method.request.header.Authorization"
-    "integration.request.path.cdPedido"        = "method.request.path.cdPedido"
+    "integration.request.path.nrPedido"        = "method.request.path.nrPedido"
   }
 }
