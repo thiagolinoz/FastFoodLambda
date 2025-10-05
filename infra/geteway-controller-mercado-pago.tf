@@ -26,8 +26,10 @@ resource "aws_api_gateway_method" "webhook_mercado_pago_pagamentos_nrPedido_post
   rest_api_id   = aws_api_gateway_rest_api.rest_api_fastfood.id
   resource_id   = aws_api_gateway_resource.webhook_mercado_pago_pagamentos_nrPedido.id
   http_method   = "POST"
-  authorization = "NONE"
+  authorization = "CUSTOM"
+  authorizer_id = aws_api_gateway_authorizer.lambda_authorizer.id
   request_parameters = {
+    "method.request.header.Authorization" = true
     "method.request.path.nrPedido" = true
   }
 }
