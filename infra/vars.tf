@@ -18,9 +18,9 @@ variable "tags" {
 
 variable "role_lab" {
  // default = "arn:aws:iam::318969550207:role/LabRole"
-  default = "arn:aws:iam::637423498848:role/LabRole"
+  default = "arn:aws:iam::387847618404:role/LabRole"
 }
 
 variable "host_elb" {
-  default = "http://a60520329719a49ea86f9fc7249c1a8e-213055686.us-east-1.elb.amazonaws.com"
+  default = "http://a31fe34d98ebf477f9e1235d4d71acf7-221921312.us-east-1.elb.amazonaws.com"
 }
