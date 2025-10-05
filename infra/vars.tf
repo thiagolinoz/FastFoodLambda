@@ -22,5 +22,5 @@ variable "role_lab" {
 }
 
 variable "host_elb" {
-  default = "http://a31fe34d98ebf477f9e1235d4d71acf7-221921312.us-east-1.elb.amazonaws.com"
+  default = "http://a989b3c862ead4778999cb40899ec157-1366353186.us-east-1.elb.amazonaws.com"
 }

@@ -3,7 +3,7 @@ name: Deploy Infra AWS
 on:
   workflow_dispatch:
   push:
-    branches: [releaseV1]
+    branches: [main]
 
 env:
   BUCKET_NAME: postech-fiap-fastfood-backend-lambda-lino #TODO trocar o nome do bucket
