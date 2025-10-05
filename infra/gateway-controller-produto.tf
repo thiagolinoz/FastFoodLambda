@@ -187,19 +187,21 @@ resource "aws_api_gateway_resource" "produto_item_desativar" {
   path_part   = "desativar"
 }
 
+# PATCH /api/v1/produto/{cdProduto}/desativar
 resource "aws_api_gateway_method" "produto_item_desativar_patch" {
   rest_api_id   = aws_api_gateway_rest_api.rest_api_fastfood.id
   resource_id   = aws_api_gateway_resource.produto_item_desativar.id
   http_method   = "PATCH"
   authorization = "CUSTOM"
   authorizer_id = aws_api_gateway_authorizer.lambda_authorizer.id
-
+  #request_validator_id = "mrcrk3" #remover?
+  #api_key_required     = true #remover?
   request_parameters = {
-    "method.request.header.Authorization" = true
-    "method.request.path.cdProduto"       = true
+    "method.request.header.Authorization" = true  # <-- obriga o header
+    "method.request.path.cdProduto" = true  # obrigatório
   }
 }
-
+# PATCH /api/v1/produto/{cdProduto}/desativar - Integração com backend
 resource "aws_api_gateway_integration" "patch_produto_item_desativar_integration" {
   rest_api_id             = aws_api_gateway_rest_api.rest_api_fastfood.id
   resource_id             = aws_api_gateway_resource.produto_item_desativar.id
@@ -209,7 +211,7 @@ resource "aws_api_gateway_integration" "patch_produto_item_desativar_integration
   uri                     = "${var.host_elb}/api/v1/produto/{cdProduto}/desativar"
 
   request_parameters = {
-    "integration.request.header.Authorization" = "method.request.header.Authorization"
-    "integration.request.path.cdProduto"       = "method.request.path.cdProduto"
+    "integration.request.header.Authorization" = "method.request.header.Authorization" #remover?
+    "integration.request.path.cdProduto" = "method.request.path.cdProduto"
   }
 }
