@@ -2,11 +2,21 @@
 
 ## Stacks utilizadas:
  - Docker
- - Docker-compose
- - Banco de dados - MariaDB
+ - Banco de dados - Aurora MySQL
  - Migration de dados - Flyway
  - Spring boot
  - Swagger
+ - Python
+ - Terraform
+ 
+## Pipeline de Deploy
+ - GitHub Action
+
+ Para utilizar a pipeline é preciso adicionar ao GitHub Secrets as variaveis necessárias da conta AWS que se pretende realizar a criação das infraestruturas.
+ O terraform contendo o código para criação de infraestrura dos Gateways, Cognito e Lambda é executado na AWS. 
+ Os códigos das funções lambda, presente no repósitorio, é empacotada e deployada na AWS.
+
+ O trigger do github action é o push no repositório main, porém pode ser realizado ao entrar Action e executar o último job.
 
 ## Ambiente de Desenvolvimento:
 
@@ -214,4 +224,5 @@ O arquido do desenho de arquitetura econtra-se na pasta ./arquitetura/arquitetur
 
 ## Vídeo 
 📹 https://youtu.be/2YXLZocAqf4
+
 
