@@ -222,7 +222,6 @@ Endpoint: Post /webhook/mercado-pago/pagamentos/{nrPedido}
 ## Desenho de Arquitetura
 O arquido do desenho de arquitetura econtra-se na pasta ./arquitetura/arquitetura fase 2.drawio
 
-## Vídeo 
-📹 https://youtu.be/2YXLZocAqf4
+
 
 
